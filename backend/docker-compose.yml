@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  click-work:
+    container_name: click-work
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: click-work
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
