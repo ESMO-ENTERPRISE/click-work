@@ -32,10 +32,8 @@ import java.util.List;
 public class WebSecurity {
 
     public final String[] ENDPOINTS_WHITELIST = {
-            "/login",
+            "/auth/**",
             "/users/save",
-            "/users/findByEmail",
-            "/roles/**"
     };
 
     @Bean
@@ -44,8 +42,7 @@ public class WebSecurity {
                 .cors(cors -> cors.configurationSource(config -> {
                     CorsConfiguration configuration = new CorsConfiguration();
                     configuration.setAllowedOrigins(
-                            Arrays.asList("http://localhost:4200",
-                                    "https://4200-victorgomez09-kanbag-kcjhhegshjj.ws-eu102.gitpod.io"));
+                            List.of("http://localhost:3000"));
                     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
                     configuration.setAllowedHeaders(List.of("*"));
 
@@ -79,14 +76,12 @@ public class WebSecurity {
     @Bean
     public JwtEncoder jwtEncoder() {
         JWK jwk = new RSAKey.Builder(KeysGenerator.getInstance().getPublicKey()).privateKey(KeysGenerator.getInstance().getPrivateKey()).build();
-        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
 
-        return new NimbusJwtEncoder(jwks);
+        return new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet(jwk)));
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }

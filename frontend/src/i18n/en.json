@@ -1,0 +1,9 @@
+{
+  "signInTitle": "Sign in",
+  "signInEmail": "Email",
+  "signInEmailRequired": "Email is required",
+  "signInEmailInvalid": "Invalid email",
+  "signInPassword": "Password",
+  "signInPasswordRequired": "Password is required",
+  "signInSubmit": "Send"
+}

@@ -1,0 +1,9 @@
+{
+  "signInTitle": "Iniciar sesión",
+  "signInEmail": "Correo electrónico",
+  "signInEmailRequired": "El correo electrónico es obligatorio",
+  "signInEmailInvalid": "El correo electrónico no es válido",
+  "signInPassword": "Contraseña",
+  "signInPasswordRequired": "La contraseña es obligatoria",
+  "signInSubmit": "Enviar"
+}

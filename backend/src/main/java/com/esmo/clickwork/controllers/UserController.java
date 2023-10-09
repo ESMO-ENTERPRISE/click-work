@@ -34,4 +34,14 @@ public class UserController {
     public ResponseEntity<ApiResponse> save(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, new Date(), "Create new user", mapper.toDTO(userService.save(mapper.toEntity(userDto)))));
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<ApiResponse> update(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, new Date(), "Update user", mapper.toDTO(userService.update(mapper.toEntity(userDto)))));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ApiResponse> delete(@RequestParam String email) {
+        return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, new Date(), "Delete user", userService.delete(email)));
+    }
 }
