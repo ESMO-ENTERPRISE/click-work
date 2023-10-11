@@ -1,9 +1,12 @@
 {
+  "singInDescription": "Una herramienta de imputaciones con generación de informes y mucho más...",
   "signInTitle": "Iniciar sesión",
   "signInEmail": "Correo electrónico",
   "signInEmailRequired": "El correo electrónico es obligatorio",
   "signInEmailInvalid": "El correo electrónico no es válido",
   "signInPassword": "Contraseña",
   "signInPasswordRequired": "La contraseña es obligatoria",
-  "signInSubmit": "Enviar"
+  "signInForgotPassword": "¿Ha olvidado la contraseña?",
+  "signInSubmit": "Enviar",
+  "signUpTitle": "Registrate"
 }

@@ -1,9 +1,12 @@
 {
+  "singInDescription": "An time tracker app with pdf reports and more...",
   "signInTitle": "Sign in",
   "signInEmail": "Email",
   "signInEmailRequired": "Email is required",
   "signInEmailInvalid": "Invalid email",
   "signInPassword": "Password",
   "signInPasswordRequired": "Password is required",
-  "signInSubmit": "Send"
+  "signInForgotPassword": "Forgot password?",
+  "signInSubmit": "Send",
+  "signUpTitle": "Sign up"
 }
