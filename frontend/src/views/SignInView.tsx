@@ -1,4 +1,3 @@
-import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { useForm } from "@esmo/react-utils/forms";
 import { useI18n } from "@esmo/react-utils/i18n";
