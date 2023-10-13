@@ -20,7 +20,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/signIn")
+    @PostMapping("/signin")
     public ResponseEntity<ApiResponse> signIn(@RequestBody SignInDto signInDto) {
         return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, new Date(), "Sign in", authService.signIn(signInDto)));
     }

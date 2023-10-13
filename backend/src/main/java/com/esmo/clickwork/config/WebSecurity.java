@@ -42,7 +42,7 @@ public class WebSecurity {
                 .cors(cors -> cors.configurationSource(config -> {
                     CorsConfiguration configuration = new CorsConfiguration();
                     configuration.setAllowedOrigins(
-                            List.of("http://localhost:3000"));
+                            List.of("http://localhost:5173"));
                     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
                     configuration.setAllowedHeaders(List.of("*"));
 

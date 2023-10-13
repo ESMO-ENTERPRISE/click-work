@@ -8,5 +8,16 @@
   "signInPasswordRequired": "La contraseña es obligatoria",
   "signInForgotPassword": "¿Ha olvidado la contraseña?",
   "signInSubmit": "Enviar",
-  "signUpTitle": "Registrate"
+  "signUpTitle": "Registrate",
+  "signUpName": "Nombre",
+  "signUpLastName": "Apellidos",
+  "signUpEmail": "Correo electrónico",
+  "signUpEmailRequired": "El correo electrónico es obligatorio",
+  "signUpEmailInvalid": "El correo electrónico no es válido",
+  "signUpPassword": "Contraseña",
+  "signUpPasswordRequired": "La contraseña es obligatoria",
+  "signUpUsername": "Usuario",
+  "signUpUsernameRequired": "El nombre de usuario es obligatorio",
+  "notFound": "Página no encontrada",
+  "goBack": "Volver"
 }

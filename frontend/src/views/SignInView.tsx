@@ -27,9 +27,9 @@ export default function SignInView() {
             }
         }
     })
-    const { error, isSuccess, mutate, response } = useSignInMutation()
+    const { error, isWaiting, mutate } = useSignInMutation()
     const { navigate } = useNavigation()
-    const [_token, setToken] = useLocalStorage(auth.token_name, "")
+    const [_, setToken] = useLocalStorage(auth.token_name, "")
 
     if (error) {
         return (
@@ -38,10 +38,10 @@ export default function SignInView() {
     }
 
     const submit = async (data: SignIn) => {
-        await mutate(data)
+        const result = await mutate(data);
 
-        if (isSuccess) {
-            setToken(response!.data)
+        if (!isWaiting) {
+            setToken(result.response!.data)
             navigate("/app")
         }
     }
@@ -79,7 +79,7 @@ export default function SignInView() {
                         </div>
 
                         <div className="mt-6">
-                            <Button className="w-full" type="submit" disabled={errors.email != "" || errors.password != ""} label={t("signInTitle")} />
+                            <Button className="w-full" type="submit" disabled={errors.email != "" || errors.password != "" || isWaiting} label={t("signInTitle")} />
                         </div>
                     </form>
                 </div>

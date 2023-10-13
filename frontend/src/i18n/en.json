@@ -8,5 +8,16 @@
   "signInPasswordRequired": "Password is required",
   "signInForgotPassword": "Forgot password?",
   "signInSubmit": "Send",
-  "signUpTitle": "Sign up"
+  "signUpTitle": "Sign up",
+  "signUpName": "Name",
+  "signUpLastName": "Last name",
+  "signUpEmail": "Email",
+  "signUpEmailRequired": "Email is required",
+  "signUpEmailInvalid": "Invalid email",
+  "signUpPassword": "Password",
+  "signUpPasswordRequired": "Password is required",
+  "signUpUsername": "Username",
+  "signUpUsernameRequired": "Username is required",
+  "notFound": "Page not found",
+  "goBack": "Back"
 }
