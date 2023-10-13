@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@esmo/react-utils": "github:ESMO-ENTERPRISE/react-utils",
+    "axios": "^1.5.1",
     "primeflex": "^3.3.1",
     "primereact": "^10.0.2",
     "react": "^18.2.0",

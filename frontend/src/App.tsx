@@ -1,8 +1,9 @@
+import {createRouter, RouteSettings} from "@esmo/react-utils/router";
+import {I18nProvider} from "@esmo/react-utils/i18n";
 import {PrimeReactProvider} from 'primereact/api';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import './App.css'
 import {routes} from "./routes.ts";
-import {createEsmoRouter, RouteSettings, EsmoI18nProvider} from "@esmo/react-utils";
 import FallbackView from "./views/FallbackView.tsx";
 import en from "./i18n/en.json";
 import es from "./i18n/es.json";
@@ -19,7 +20,7 @@ function App() {
         fallback: FallbackView,
         routes: routes
     }
-    const [Router, RouterView] = createEsmoRouter(routerConfig);
+    const [Router, RouterView] = createRouter(routerConfig);
 
     // I18N config
     const i18nConfig = [
@@ -35,11 +36,11 @@ function App() {
 
     return (
         <PrimeReactProvider value={primeConfig}>
-            <EsmoI18nProvider language="es" locales={i18nConfig}>
+            <I18nProvider language="es" locales={i18nConfig}>
                 <Router>
                     <RouterView/>
                 </Router>
-            </EsmoI18nProvider>
+            </I18nProvider>
         </PrimeReactProvider>
     )
 }
