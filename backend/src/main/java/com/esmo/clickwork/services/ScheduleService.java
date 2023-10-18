@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,14 +19,20 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final UserService userService;
 
-    public List<Schedule> findByUserEmail(String userEmail) {
-        User user = userService.findByEmail(userEmail);
+    public List<Schedule> findByUserId(String userId) {
+        User user = userService.findById(userId);
 
         return scheduleRepository.findByUser(user);
     }
 
-    public List<Schedule> findByUserId(String userId) {
+    public List<Schedule> findByUserIdAndDate(String userId, Date date) {
         User user = userService.findById(userId);
+
+        return scheduleRepository.findByUserAndEntryTime(user, date);
+    }
+
+    public List<Schedule> findByUserEmail(String userEmail) {
+        User user = userService.findByEmail(userEmail);
 
         return scheduleRepository.findByUser(user);
     }

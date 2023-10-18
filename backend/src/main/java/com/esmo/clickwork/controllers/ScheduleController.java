@@ -22,7 +22,12 @@ public class ScheduleController {
 
     @RequestMapping("/findByUserId")
     public ResponseEntity<ApiResponse> findByUserId(@RequestParam String userId) {
-        return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, new Date(), "Find schedules by user id", scheduleService.findByUserEmail(userId).stream().map(mapper::toDTO).toList()));
+        return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, new Date(), "Find schedules by user id", scheduleService.findByUserId(userId).stream().map(mapper::toDTO).toList()));
+    }
+
+    @RequestMapping("/findByUserIdAndDate")
+    public ResponseEntity<ApiResponse> findByUserIdAndDate(@RequestParam String userId, @RequestParam Date date) {
+        return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, new Date(), "Find schedules by user id and date", scheduleService.findByUserIdAndDate(userId, date).stream().map(mapper::toDTO).toList()));
     }
 
     @RequestMapping("/findByUserEmail")

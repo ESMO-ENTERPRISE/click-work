@@ -19,5 +19,7 @@
   "signUpUsername": "Usuario",
   "signUpUsernameRequired": "El nombre de usuario es obligatorio",
   "notFound": "Página no encontrada",
-  "goBack": "Volver"
+  "goBack": "Volver",
+  "appName": "Clickwork",
+  "appGretings": "Bienvenido de nuevo"
 }

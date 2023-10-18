@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@esmo/react-utils": "github:ESMO-ENTERPRISE/react-utils",
+    "@esmo/react-utils": "link:..\\..\\react-utils",
     "axios": "^1.5.1",
     "primeflex": "^3.3.1",
     "primereact": "^10.0.2",

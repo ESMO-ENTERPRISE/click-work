@@ -5,7 +5,7 @@ import { SignIn } from "../models/auth.model.ts";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { useSignInMutation } from "../services/auth.service.ts";
-import { Link, useNavigation } from "@esmo/react-utils/router";
+import { Link, useNavigate } from "@esmo/react-utils/router";
 import { Loader } from "../components/Loader.component.tsx";
 import { useLocalStorage } from "@esmo/react-utils/hooks";
 import { auth } from "../constants/auth.constant.ts";
@@ -28,7 +28,7 @@ export default function SignInView() {
         }
     })
     const { error, isWaiting, mutate } = useSignInMutation()
-    const { navigate } = useNavigation()
+    const navigate = useNavigate("/app")
     const [_, setToken] = useLocalStorage(auth.token_name, "")
 
     if (error) {
@@ -42,7 +42,7 @@ export default function SignInView() {
 
         if (!isWaiting) {
             setToken(result.response!.data)
-            navigate("/app")
+            navigate()
         }
     }
 
@@ -59,7 +59,7 @@ export default function SignInView() {
                 <div className="w-full p-4">
                     <div className="flex justify-content-between">
                         <span className="text-left font-bold">{t("signInTitle")}</span>
-                        <Link className="text-primary cursor-pointer" to="/singup">{t("signUpTitle")}</Link>
+                        <Link className="text-primary cursor-pointer" to="/signup">{t("signUpTitle")}</Link>
                     </div>
                     <form className="w-full px-0 py-4 lg:p-4" onSubmit={handleSubmit(submit)}>
                         <div className="flex flex-column gap-2 text-left">

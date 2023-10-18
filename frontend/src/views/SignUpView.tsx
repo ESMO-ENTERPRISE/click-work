@@ -5,7 +5,7 @@ import {SignUp} from "../models/auth.model.ts";
 import {Button} from "primereact/button";
 import {Password} from "primereact/password";
 import {useSignUpMutation} from "../services/auth.service.ts";
-import {Link, useNavigation} from "@esmo/react-utils/router";
+import {Link, useNavigate} from "@esmo/react-utils/router";
 import {Loader} from "../components/Loader.component.tsx";
 
 export default function SignUpView() {
@@ -39,7 +39,7 @@ export default function SignUpView() {
         }
     })
     const { error, isWaiting, mutate } = useSignUpMutation()
-    const { navigate } = useNavigation()
+    const navigate = useNavigate("/signin")
 
     if (error) {
         return (
@@ -51,7 +51,7 @@ export default function SignUpView() {
         await mutate(data);
 
         if (!isWaiting) {
-            navigate("/signin")
+            navigate()
         }
     }
 
