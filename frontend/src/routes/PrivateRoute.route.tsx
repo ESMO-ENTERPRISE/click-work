@@ -11,9 +11,9 @@ type Props = {
 export function PrivateRoute({children}: Props): ReactNode {
     const [token] = useLocalStorage(auth.token_name, "")
 
-    if (!token) {
-        return <Redirect href="/signin" />
-    }
+    // if (!token) {
+    //     return <Redirect href="/signin" />
+    // }
 
     return children;
 }

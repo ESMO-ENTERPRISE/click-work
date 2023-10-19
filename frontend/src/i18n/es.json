@@ -21,5 +21,6 @@
   "notFound": "Página no encontrada",
   "goBack": "Volver",
   "appName": "Clickwork",
-  "appGretings": "Bienvenido de nuevo"
+  "appGretings": "Bienvenido de nuevo",
+  "internalError": "Algo no ha ido bien"
 }

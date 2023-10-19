@@ -1,12 +1,18 @@
-import {InputText} from "primereact/inputtext";
-import {useForm} from "@esmo/react-utils/forms";
-import {useI18n} from "@esmo/react-utils/i18n";
-import {SignUp} from "../models/auth.model.ts";
-import {Button} from "primereact/button";
-import {Password} from "primereact/password";
-import {useSignUpMutation} from "../services/auth.service.ts";
-import {Link, useNavigate} from "@esmo/react-utils/router";
-import {Loader} from "../components/Loader.component.tsx";
+import { useForm } from "@esmo/react-utils/forms";
+import { useI18n } from "@esmo/react-utils/i18n";
+import { Link, useNavigate } from "@esmo/react-utils/router";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { Loader } from "../components/Loader.component.tsx";
+import { SignUp } from "../models/auth.model.ts";
+import { useMutation } from "@esmo/react-utils/state";
+import { ApiResponse } from "../models/api.model.ts";
+import { signup } from "../services/auth.service.ts";
+import { User } from "../models/user.model.ts";
+import { Toast } from "primereact/toast";
+import { useRef } from "react";
+import { useIsomorphicLayoutEffect } from "@esmo/react-utils/hooks";
 
 export default function SignUpView() {
     const { t } = useI18n()
@@ -38,21 +44,30 @@ export default function SignUpView() {
             }
         }
     })
-    const { error, isWaiting, mutate } = useSignUpMutation()
+    const { mutate, error, isMutating, isSuccess } = useMutation<SignUp, ApiResponse<User>>(signup)
     const navigate = useNavigate("/signin")
-
-    if (error) {
-        return (
-            <Loader />
-        )
+    
+    const toast = useRef<Toast>(null);
+    const showError = () => {
+        toast.current?.show({severity:'error', summary: 'Error', detail: t("internalError"), life: 3000});
     }
+
+    useIsomorphicLayoutEffect(() => {
+        if (error) showError();
+    }, [error])
 
     const submit = async (data: SignUp) => {
         await mutate(data);
 
-        if (!isWaiting) {
+        if (isSuccess) {
             navigate()
         }
+    }
+
+    if (isMutating) {
+        return (
+            <Loader />
+        )
     }
 
     return (
@@ -106,11 +121,13 @@ export default function SignUpView() {
                         </div>
 
                         <div className="mt-6">
-                            <Button className="w-full" type="submit" disabled={errors.email != "" || errors.password != "" || isWaiting} label={t("signUpTitle")} />
+                            <Button className="w-full" type="submit" disabled={errors.email != "" || errors.password != ""} label={t("signUpTitle")} />
                         </div>
                     </form>
                 </div>
             </div>
+
+            <Toast ref={toast} />
         </div>
 
     )

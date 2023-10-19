@@ -1,14 +1,18 @@
-import { InputText } from "primereact/inputtext";
 import { useForm } from "@esmo/react-utils/forms";
+import { useIsomorphicLayoutEffect, useLocalStorage } from "@esmo/react-utils/hooks";
 import { useI18n } from "@esmo/react-utils/i18n";
-import { SignIn } from "../models/auth.model.ts";
-import { Button } from "primereact/button";
-import { Password } from "primereact/password";
-import { useSignInMutation } from "../services/auth.service.ts";
 import { Link, useNavigate } from "@esmo/react-utils/router";
+import { useMutation } from "@esmo/react-utils/state";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { Toast } from "primereact/toast";
+import { useRef } from "react";
 import { Loader } from "../components/Loader.component.tsx";
-import { useLocalStorage } from "@esmo/react-utils/hooks";
 import { auth } from "../constants/auth.constant.ts";
+import { ApiResponse } from "../models/api.model.ts";
+import { SignIn } from "../models/auth.model.ts";
+import { signin } from "../services/auth.service.ts";
 
 export default function SignInView() {
     const { t } = useI18n()
@@ -27,23 +31,32 @@ export default function SignInView() {
             }
         }
     })
-    const { error, isWaiting, mutate } = useSignInMutation()
+    const { mutate, data: responseData, error, isMutating, isSuccess } = useMutation<SignIn, ApiResponse<string>>(signin)
     const navigate = useNavigate("/app")
     const [_, setToken] = useLocalStorage(auth.token_name, "")
 
-    if (error) {
+    useIsomorphicLayoutEffect(() => {
+        if (error) showError();
+    }, [error])
+
+    const submit = async (data: SignIn) => {
+        mutate(data);
+
+        if (isSuccess) {
+            setToken(responseData!.data)
+            navigate()
+        }
+    }
+
+    const toast = useRef<Toast>(null);
+    const showError = () => {
+        toast.current?.show({severity:'error', summary: 'Error', detail: t("internalError"), life: 3000});
+    }
+
+    if (isMutating) {
         return (
             <Loader />
         )
-    }
-
-    const submit = async (data: SignIn) => {
-        const result = await mutate(data);
-
-        if (!isWaiting) {
-            setToken(result.response!.data)
-            navigate()
-        }
     }
 
     return (
@@ -79,11 +92,13 @@ export default function SignInView() {
                         </div>
 
                         <div className="mt-6">
-                            <Button className="w-full" type="submit" disabled={errors.email != "" || errors.password != "" || isWaiting} label={t("signInTitle")} />
+                            <Button className="w-full" type="submit" disabled={errors.email != "" || errors.password != ""} label={t("signInTitle")} />
                         </div>
                     </form>
                 </div>
             </div>
+
+            <Toast ref={toast} />
         </div>
 
     )
